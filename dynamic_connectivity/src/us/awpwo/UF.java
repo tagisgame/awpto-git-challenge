@@ -10,7 +10,7 @@ public class UF {
 			id[i] = i;
 		}
 	}
-	
+
   private int root(int i) {
     while (i != id[i]) {
       i = id[i];
@@ -25,7 +25,15 @@ public class UF {
   public void union(int p, int q) {
     int i = root(p);
     int j = root(q);
-    id[i] = j;
+    if (i == j) return;
+    if (sz[i] < sz[j]) {
+      id[i] = j;
+      sz[j] += sz[i];
+    }
+    else {
+      id[j] = i;
+      sz[i] += sz[j];
+    }
   }
 
 }
